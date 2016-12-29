@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import map from 'lodash/map';
 
-
 /**
  * SignupForm component
  */
@@ -32,7 +31,11 @@ class SignupForm extends Component {
 
     onSubmit(e) {
         e.preventDefault();
-        console.log(this.state);
+
+        // post request on server
+        // axios.post('/api/users', { user: this.state });
+
+        this.props.userSignupRequest(this.state);
     }
 
     render() {
@@ -111,5 +114,9 @@ class SignupForm extends Component {
         )
     }
 }
+
+SignupForm.propTypes = {
+    userSignupRequest: React.PropTypes.func.isRequired
+};
 
 export default SignupForm;
