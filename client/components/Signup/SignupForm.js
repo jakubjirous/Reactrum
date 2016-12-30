@@ -1,9 +1,7 @@
 import React, {Component} from 'react';
-import map from 'lodash/map';
-import classnames from 'classnames';
 import validateInput from '../../../server/shared/validations/signup';
 import TextFieldGroup from '../Common/TextFieldGroup';
-import { browserHistory } from 'react-router';
+
 
 /**
  * SignupForm component
@@ -49,6 +47,7 @@ class SignupForm extends Component {
     onSubmit(e) {
         e.preventDefault();
 
+        // client-side validation
         if (this.isValid()) {
 
             this.setState({errors: {}, isLoading: true});
@@ -57,29 +56,21 @@ class SignupForm extends Component {
             this.props.userSignupRequest(this.state).then(
                 // everything well
                 () => {
+                    this.props.addFlashMessage({
+                        type: 'success',
+                        text: 'You signed up successfully. Welcome in reactrum.'
+                    });
+
                     // redirects on successful server response
-                    // browserHistory.push('/');
                     this.context.router.push('/');
                 },
                 // everything bad
                 ({response}) => this.setState({errors: response.data, isLoading: false})
             );
         }
-
-        // promise
-        this.props.userSignupRequest(this.state).then(
-            // everything well
-            () => { },
-            // everything bad
-            ({response}) => this.setState({errors: response.data, isLoading: false})
-        );
     }
 
     render() {
-
-        // const options = map(timezones, (val, key) => {
-        //    <option key={val} val={val}>{key}</option>
-        // });
 
         const {errors} = this.state;
 
@@ -140,7 +131,8 @@ class SignupForm extends Component {
 }
 
 SignupForm.propTypes = {
-    userSignupRequest: React.PropTypes.func.isRequired
+    userSignupRequest: React.PropTypes.func.isRequired,
+    addFlashMessage: React.PropTypes.func.isRequired
 };
 
 SignupForm.contextTypes = {
