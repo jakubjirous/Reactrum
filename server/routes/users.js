@@ -12,8 +12,12 @@ router.post('/', (req, res) => {
 
     const {errors, isValid} = validateInput(req.body);
 
-    // response to client if errors
-    if (!isValid) {
+    if (isValid) {
+        // response to client if success
+        res.json({ success: true });
+
+    } else {
+        // response to client if errors
         res.status(400).json(errors);
     }
 });

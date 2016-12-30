@@ -3,7 +3,7 @@ import map from 'lodash/map';
 import classnames from 'classnames';
 import validateInput from '../../../server/shared/validations/signup';
 import TextFieldGroup from '../Common/TextFieldGroup';
-
+import { browserHistory } from 'react-router';
 
 /**
  * SignupForm component
@@ -57,6 +57,9 @@ class SignupForm extends Component {
             this.props.userSignupRequest(this.state).then(
                 // everything well
                 () => {
+                    // redirects on successful server response
+                    // browserHistory.push('/');
+                    this.context.router.push('/');
                 },
                 // everything bad
                 ({response}) => this.setState({errors: response.data, isLoading: false})
@@ -138,6 +141,10 @@ class SignupForm extends Component {
 
 SignupForm.propTypes = {
     userSignupRequest: React.PropTypes.func.isRequired
+};
+
+SignupForm.contextTypes = {
+    router: React.PropTypes.object.isRequired
 };
 
 export default SignupForm;
