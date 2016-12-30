@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import map from 'lodash/map';
 import classnames from 'classnames';
+import validateInput from '../../../server/shared/validations/signup';
+import TextFieldGroup from '../Common/TextFieldGroup';
 
 
 /**
@@ -33,20 +35,40 @@ class SignupForm extends Component {
         this.setState({[e.target.name]: e.target.value});
     }
 
+    // client-side validation
+    isValid() {
+        const { errors, isValid } = validateInput(this.state);
+
+        if(!isValid) {
+            this.setState({ errors });
+        }
+
+        return isValid;
+    }
+
     onSubmit(e) {
-        // clear all errors
-        this.setState({ errors: {}, isLoading: true });
         e.preventDefault();
 
-        // post request on server
-        // axios.post('/api/users', { user: this.state });
+        if (this.isValid()) {
+
+            this.setState({errors: {}, isLoading: true});
+
+            // promise
+            this.props.userSignupRequest(this.state).then(
+                // everything well
+                () => {
+                },
+                // everything bad
+                ({response}) => this.setState({errors: response.data, isLoading: false})
+            );
+        }
 
         // promise
         this.props.userSignupRequest(this.state).then(
             // everything well
-            () => {},
+            () => { },
             // everything bad
-            ({ response }) => this.setState({ errors: response.data, isLoading: false })
+            ({response}) => this.setState({errors: response.data, isLoading: false})
         );
     }
 
@@ -56,68 +78,53 @@ class SignupForm extends Component {
         //    <option key={val} val={val}>{key}</option>
         // });
 
-        const { errors } = this.state;
+        const {errors} = this.state;
 
         return (
             <form onSubmit={this.onSubmit}>
                 <h1>Join reactrum</h1>
 
-                <div className={classnames('form-group', { 'has-danger': errors.username })}>
-                    <label className="form-control-label" htmlFor="usernameInput">Username</label>
-                    <input
-                        type="text"
-                        name="username"
-                        className={classnames('form-control', { 'form-control-danger': errors.username })}
-                        placeholder="Enter username"
-                        id="usernameInput"
-                        value={this.state.username}
-                        onChange={this.onChange}
-                    />
-                    {errors.username && <div className="form-control-feedback"><small>{errors.username}</small></div>}
-                </div>
+                <TextFieldGroup
+                    id="usernameInput"
+                    field="username"
+                    value={this.state.username}
+                    label="Username"
+                    error={errors.username}
+                    placeholder="Enter your username"
+                    onChange={this.onChange}
+                />
 
-                <div className={classnames('form-group', { 'has-danger': errors.email })}>
-                    <label className="form-control-label" htmlFor="emailInput">E-mail</label>
-                    <input
-                        type="email"
-                        name="email"
-                        className={classnames('form-control', { 'form-control-danger': errors.email })}
-                        placeholder="Enter e-mail"
-                        id="emailInput"
-                        value={this.state.email}
-                        onChange={this.onChange}
-                    />
-                    {errors.email && <div className="form-control-feedback"><small>{errors.email}</small></div>}
-                </div>
+                <TextFieldGroup
+                    id="emailInput"
+                    field="email"
+                    value={this.state.email}
+                    label="E-mail"
+                    error={errors.email}
+                    placeholder="Enter your e-mail address"
+                    onChange={this.onChange}
+                />
 
-                <div className={classnames('form-group', { 'has-danger': errors.password })}>
-                    <label className="form-control-label" htmlFor="passwordInput">Password</label>
-                    <input
-                        type="password"
-                        name="password"
-                        className={classnames('form-control', { 'form-control-danger': errors.password })}
-                        placeholder="Enter password"
-                        id="passwordInput"
-                        value={this.state.password}
-                        onChange={this.onChange}
-                    />
-                    {errors.password && <div className="form-control-feedback"><small>{errors.password}</small></div>}
-                </div>
+                <TextFieldGroup
+                    id="passwordInput"
+                    field="password"
+                    value={this.state.password}
+                    label="Password"
+                    error={errors.password}
+                    type="password"
+                    placeholder="Enter your password"
+                    onChange={this.onChange}
+                />
 
-                <div className={classnames('form-group', { 'has-danger': errors.passwordConfirmation })}>
-                    <label className="form-control-label" htmlFor="passwordConfirmationInput">Password confirmation</label>
-                    <input
-                        type="password"
-                        name="passwordConfirmation"
-                        className={classnames('form-control', { 'form-control-danger': errors.passwordConfirmation })}
-                        placeholder="Enter password confirmation"
-                        id="passwordConfirmationInput"
-                        value={this.state.passwordConfirmation}
-                        onChange={this.onChange}
-                    />
-                    {errors.passwordConfirmation && <div className="form-control-feedback"><small>{errors.passwordConfirmation}</small></div>}
-                </div>
-
+                <TextFieldGroup
+                    id="passwordConfirmationInput"
+                    field="passwordConfirmation"
+                    value={this.state.passwordConfirmation}
+                    label="Password confirmation"
+                    error={errors.passwordConfirmation}
+                    type="password"
+                    placeholder="Enter your password confirmation"
+                    onChange={this.onChange}
+                />
 
                 <div className="form-group">
                     <button type="submit" className="btn btn-primary btn-lg" disabled={this.state.isLoading}>
