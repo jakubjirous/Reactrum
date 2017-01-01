@@ -42,5 +42,4 @@ FlashMessage.PropTypes = {
     deleteFlashMessage: React.PropTypes.func.isRequired
 };
 
-
 export default FlashMessage;

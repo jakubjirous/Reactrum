@@ -14,8 +14,8 @@ class Greetings extends Component {
             <div>
                 <div className="Greetings-header">
                     <img src="" className="Greetings-logo" alt="logo"/>
-                    <h2>Welcome to Reactrum</h2>
-                    <h6>Easy forum created in React technology</h6>
+                    <h2>Welcome in reactrum</h2>
+                    <h6>Easy forum created by React/Redux technology</h6>
                 </div>
 
                 <Link to="/board" className="btn btn-primary btn-lg">Get started</Link>

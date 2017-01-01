@@ -121,7 +121,7 @@ class SignupForm extends Component {
                 />
 
                 <div className="form-group">
-                    <button type="submit" className="btn btn-primary btn-lg" disabled={this.state.isLoading}>
+                    <button type="submit" className="btn btn-primary" disabled={this.state.isLoading}>
                         Sign up
                     </button>
                 </div>

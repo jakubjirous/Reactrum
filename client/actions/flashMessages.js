@@ -1,5 +1,6 @@
 import { ADD_FLASH_MESSAGE, DELETE_FLASH_MESSAGE } from './types';
 
+
 /**
  * Action creator for adding flash messages
  * @param message
