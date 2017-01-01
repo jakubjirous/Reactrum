@@ -14,7 +14,7 @@ let router = express.Router();
 
 
 /**
- * Database layer validation
+ * Database layer uniqueness validation
  * @param data
  * @param otherValidations
  * @returns {Promise}
@@ -40,6 +40,18 @@ function validateInput(data, otherValidations) {
         }
     });
 }
+
+
+router.get('/:identifier', (req, res) => {
+    User.query({
+        select: ['username', 'email'],
+        where: { email: req.params.identifier },
+        orWhere: { username: req.params.identifier }
+    }).fetch().then(user => {
+        res.json({ user });
+    });
+});
+
 
 
 router.post('/', (req, res) => {
@@ -84,7 +96,7 @@ router.post('/', (req, res) => {
         }
 
     });
-
 });
+
 
 export default router;
