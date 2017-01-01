@@ -102,7 +102,7 @@ class SignupForm extends Component {
 
         return (
             <form onSubmit={this.onSubmit}>
-                <h1>Join reactrum</h1>
+                <h1>Sign up</h1>
 
                 <TextFieldGroup
                     id="usernameInput"
