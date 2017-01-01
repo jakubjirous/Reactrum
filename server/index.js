@@ -7,8 +7,10 @@ import webpackMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from '../webpack.config.dev';
 
-// import users routes
+// import routes
 import users from './routes/users';
+import auth from './routes/auth';
+
 
 let app = express();
 
@@ -18,8 +20,9 @@ const compiler = webpack(webpackConfig);
 // body parser middleware
 app.use(bodyParser.json());
 
-// users route
+// routes
 app.use('/api/users', users);
+app.use('/api/auth', auth);
 
 
 // webpack middleware to creating JS bundle
