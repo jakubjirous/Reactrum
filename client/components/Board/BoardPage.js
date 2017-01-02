@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import BoardForm from './BoardForm';
 
 
 /**
@@ -8,7 +9,9 @@ class BoardPage extends Component {
 
     render() {
         return (
-            <h1>Board page</h1>
+            <div>
+                <BoardForm />
+            </div>
         )
     }
 }

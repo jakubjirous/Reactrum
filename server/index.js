@@ -10,6 +10,7 @@ import webpackConfig from '../webpack.config.dev';
 // import routes
 import users from './routes/users';
 import auth from './routes/auth';
+import board from './routes/board';
 
 
 let app = express();
@@ -23,6 +24,7 @@ app.use(bodyParser.json());
 // routes
 app.use('/api/users', users);
 app.use('/api/auth', auth);
+app.use('/api/board', board);
 
 
 // webpack middleware to creating JS bundle
