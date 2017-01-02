@@ -52,7 +52,7 @@ class NavigationBar extends Component {
             <nav className="navbar navbar-full navbar-dark bg-inverse">
                 <div className="container">
                     <Link to={`/`} className="navbar-brand">
-                        <img src="logo.svg" className="Menu-logo" alt="logo"/>
+                        <img src="" className="Menu-logo" alt="logo"/>
                         Reactrum
                     </Link>
                     <ul className="nav navbar-nav">

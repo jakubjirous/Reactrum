@@ -1,8 +1,31 @@
 import React, {Component} from 'react';
-import validateInput from '../../../server/shared/validations/login';
 import TextFieldGroup from '../Common/TextFieldGroup';
 import {connect} from 'react-redux';
 import { login} from '../../actions/authActions';
+
+import isEmpty from 'lodash/isEmpty';
+import Validator from 'validator';
+
+
+function validateInput(data) {
+
+    let errors = {};
+
+    // identifier field validation
+    if(Validator.isNull(data.identifier)) {
+        errors.identifier = 'This field is required';
+    }
+
+    // password field validation
+    if(Validator.isNull(data.password)) {
+        errors.password = 'This field is required';
+    }
+
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
 
 
 /**
