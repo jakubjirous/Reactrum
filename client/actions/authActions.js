@@ -1,6 +1,6 @@
 import axios from 'axios';
 import setAuthorizationToken from '../utils/setAuthorizationToken';
-import jwt from 'jsonwebtoken';
+import jwtDecode from 'jwt-decode';
 import { SET_CURRENT_USER } from './types';
 
 
@@ -25,7 +25,7 @@ export function login(data) {
             setAuthorizationToken(token);
 
             // token decoding and save to redux store
-            dispatch(setCurrentUser(jwt.decode(token)));
+            dispatch(setCurrentUser(jwtDecode(token)));
 
         });
     }
