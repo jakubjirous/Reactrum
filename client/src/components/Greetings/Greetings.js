@@ -13,7 +13,7 @@ class Greetings extends Component {
         return (
             <div>
                 <div className="Greetings-header">
-                    <img src="" className="Greetings-logo" alt="logo"/>
+                    {/*<img src="" className="Greetings-logo" alt="logo"/>*/}
                     <h2>Welcome in reactrum</h2>
                     <h6>Easy forum created by React/Redux technology</h6>
                 </div>

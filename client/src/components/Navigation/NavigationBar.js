@@ -52,11 +52,12 @@ class NavigationBar extends Component {
             <nav className="navbar navbar-full navbar-dark bg-inverse">
                 <div className="container">
                     <Link to={`/`} className="navbar-brand">
-                        <img src="" className="Menu-logo" alt="logo"/>
+                        {/*<img src="" className="Menu-logo" alt="logo"/>*/}
                         Reactrum
                     </Link>
                     <ul className="nav navbar-nav">
                         <NavigationLink to={`/board`}>Board</NavigationLink>
+                        <NavigationLink to={`/board-create`}>Create board</NavigationLink>
                     </ul>
 
                     {isAuthenticated ? userLinks : guestLinks}
