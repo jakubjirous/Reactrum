@@ -1,0 +1,437 @@
+FORMAT: 1A
+HOST: http://polls.apiblueprint.org/
+
+# PWA
+
+Reactrum API 
+
+
+
+
+## Users [/api/users]
+
+
+### Create user [POST]
+
++ Request (application/json)
+
+        [
+            {
+                "username": "User",
+                "email": "user@example.cz",
+                "password": "password",
+                "passwordConfirmation": "password",
+                "invalid": false,
+                "isLoading": false,
+                "errors": {
+                    "username": "",
+                    "email": ""
+                }
+            }
+        ]
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /
+            
+    + Body        
+    
+            {
+                "success": true,
+            }
+
+
+## Users [/api/users/{identifier}]
+
+
+### Get user by email or username [GET]
+
++ Parameters
+
+    + identifier: "username" or "email" (string) - An unique identifier of user
+
++ Response 200 (application/json)
+
+        [
+            {
+                "username": "User",
+                "email": "user@example.cz",
+            }
+        ]
+
+
+## Users [/api/users/id/{identifier}]
+
+
+### Get user by ID "identifier" [GET]
+
++ Parameters
+
+    + identifier: 1 (number) - An unique identifier of user
+
++ Response 200 (application/json)
+
+        [
+            {
+                "user": {
+                    "username": "User",
+                }
+            }
+        ]
+
+
+
+## Auth [/api/auth]
+
+### Testing if is user authenticated correctly [POST]
+
++ Request (application/json)
+
+        [
+            {
+                "identifier": "User",
+                "password": "password",
+            }
+        ]
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /
+            
+    + Body        
+    
+            {
+                "token": "jwt-token-with-hash-id-and-username-into",
+            }
+            
+            
++ Response 401 (application/json)
+
+    + Headers
+
+            Location: /
+            
+    + Body        
+    
+            {
+                "errors": {
+                    "form": "Invalid credentials"
+                }
+            }            
+            
+            
+            
+            
+## Categories [/api/category]
+
+
+### Get all board categories [GET]
+
+
++ Response 200 (application/json)
+
+        [
+            {
+                "categories":
+                [
+                    {
+                        "id": 1,
+                        "title": "General"
+                    },
+                    {
+                        "id": 2,
+                        "title": "Support"
+                    },
+                    {
+                        "id": 3,
+                        "title": "Ideas"
+                    },
+                    {
+                        "id": 4,
+                        "title": "FAQ"
+                    }
+                ]
+            }
+        ]       
+        
+        
+        
+        
+## Board [/api/board]
+
+
+### Create new board [POST]
+
++ Request (application/json)
+
+        [
+            {
+                "title": "New board",
+                "categoryIdentifier": 1,
+            }
+        ]
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /
+            
+    + Body        
+    
+            {
+                "success": true,
+            }
+
+
+## Board [/api/board/{identifier}]
+
+
+### Get all boards in category by ID [GET]
+
++ Parameters
+
+    + identifier: "id" (number) - An unique identifier of board category
+
++ Response 200 (application/json)
+
+        [
+            {
+                "boards": 
+                [
+                    {
+                        "id": 1,
+                        "title": "How to"
+                    },
+                    {
+                        "id": 1,
+                        "title": "Welcome in reactrum"
+                    },
+                ]
+            }
+        ]
+
+
+## Board [/api/board/id/{identifier}]
+
+
+### Get board by ID "identifier" [GET]
+
++ Parameters
+
+    + identifier: 1 (number) - An unique identifier of board
+
++ Response 200 (application/json)
+
+        [
+            {
+                "board": {
+                    "id": 1
+                    "title": "Board title",
+                }
+            }
+        ]
+
+
+
+
+## Topic [/api/topic]
+
+
+### Create new topic [POST]
+
++ Request (application/json)
+
+        [
+            {
+                "title": "New topic",
+                "boardIdentifier": 1,
+                "userIdentifier": 2,
+            }
+        ]
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /
+            
+    + Body        
+    
+            {
+                "success": true,
+            }
+
+
+## Topic [/api/topic/{identifier}]
+            
+            
+### Get all topic in board by ID [GET]
+
++ Parameters
+
+    + identifier: "id" (number) - An unique identifier of topic category
+
++ Response 200 (application/json)
+
+        [
+            {
+                "topics": 
+                [
+                    {
+                        "id": 1,
+                        "title": "How to create new board",
+                        "board_id": 9,
+                        "user_id": 5,
+                        "created_at": "2017-01-07T10:27:57.456Z"
+                    },
+                    {
+                        "id": 2,
+                        "title": "How to add new topic",
+                        "board_id": 9,
+                        "user_id": 5,
+                        "created_at": "2017-01-07T14:22:15.974Z"
+                    }
+                ]
+            }
+        ]
+
+
+## Topic [/api/topic/id/{identifier}]
+
+
+### Get topic by ID "identifier" [GET]
+
++ Parameters
+
+    + identifier: 1 (number) - An unique identifier of topic
+
++ Response 200 (application/json)
+
+        [
+            {
+                "topic": {
+                    "id": 1
+                    "title": "How to create new board",
+                }
+            }
+        ]
+
+
+
+
+## Post [/api/post]
+
+
+### Create new post [POST]
+
++ Request (application/json)
+
+        [
+            {
+                "test": "Post text message",
+                "topicIdentifier": 1,
+                "userIdentifier": 2,
+            }
+        ]
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /
+            
+    + Body        
+    
+            {
+                "success": true,
+            }
+
+
+## Post [/api/post/{identifier}]
+            
+            
+### Get all posts in topic by ID [GET]
+
++ Parameters
+
+    + identifier: "id" (number) - An unique identifier of topic
+
++ Response 200 (application/json)
+
+        [
+            {
+                "posts": 
+                [
+                    {
+                        "id": 1,
+                        "text": "Nejdříve se musíte zaregistrovat do reactrum aplikace",
+                        "topic_id": 1,
+                        "user_id": 1,
+                        "created_at": "2017-01-07T10:29:09.780Z"
+                    },
+                    {
+                        "id": 2, 
+                        "text": "Dále se musíte přihlasit na stránce Login",
+                        "topic_id": 1,
+                        "user_id": 5,
+                        "created_at": "2017-01-07T10:29:33.344Z"
+                    },
+                    {
+                        "id": 3,
+                        "text": "Po přihlášení pod vaším účtem se můžete směle pustit do vytváření nových Boardů, Topiců a Postů, přejeme příjemnou zábavu :)",
+                        "topic_id": 1,
+                        "user_id": 6,
+                        "created_at": "2017-01-07T10:30:29.012Z"
+                    }
+                ]
+            }
+        ]
+
+
+## Post [/api/post/id/{identifier}]
+
+
+### Get post by ID "identifier" [GET]
+
++ Parameters
+
+    + identifier: 1 (number) - An unique identifier of post
+
++ Response 200 (application/json)
+
+        [
+            {
+                "post": 
+                    {
+                        "id": 1,
+                        "text": "Nejdříve se musíte zaregistrovat do reactrum aplikace",
+                        "topic_id": 1,
+                        "user_id": 1,
+                        "created_at": "2017-01-07T10:29:09.780Z"
+                    }
+                }
+            }
+        ]
+
+
+## Post [/api/post/count/id/{identifier}]
+
+
+### Get posts count in topic by ID "identifier" [GET]
+
++ Parameters
+
+    + identifier: 1 (number) - An unique identifier of topic
+
++ Response 200 (application/json)
+
+        [
+            {
+                "count": 7
+            }
+        ]
