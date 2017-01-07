@@ -13,11 +13,11 @@ class BoardLink extends Component {
         const {id, title} = this.props.board;
 
         return (
-            <h6>
+            <h5>
                 <Link to={`/board/${id}`} className="card-link">
-                    {changeCase.upperCaseFirst(title)}
+                    <strong>{changeCase.upperCaseFirst(title)}</strong>
                 </Link>
-            </h6>
+            </h5>
         );
     }
 

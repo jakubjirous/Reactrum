@@ -5,6 +5,9 @@ import isEmpty from 'lodash/isEmpty';
 import Validator from 'validator';
 
 
+import './PostCreateForm.scss';
+
+
 function validateInput(data) {
 
     let errors = {};

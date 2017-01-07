@@ -3,6 +3,9 @@ import {Link} from 'react-router';
 import changeCase from 'change-case';
 
 
+import './TopicHeader.scss';
+
+
 /**
  * TopicHeader component
  */
@@ -38,7 +41,7 @@ class TopicHeader extends Component {
         const {title} = this.state.board;
 
         return (
-            <div>
+            <div className="topic-header">
                 <h3>
                     <Link to={`/boards`}>
                         Boards

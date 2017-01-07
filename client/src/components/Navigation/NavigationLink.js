@@ -7,7 +7,7 @@ import {Link} from 'react-router';
 class NavigationLink extends Component {
     render() {
         let isActive = this.context.router.isActive(this.props.to, true);
-        let className = isActive ? 'nav-item active' : 'nav-item';
+        let className = isActive ? 'nav-item' : 'nav-item';
 
         return(
             <li className={className}>

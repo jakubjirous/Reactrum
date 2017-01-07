@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import changeCase from 'change-case';
+
+
+import './PostText.scss';
 
 
 /**
@@ -32,7 +34,7 @@ class PostText extends Component {
 
     render() {
 
-        const {id, text, created_at} = this.props.post;
+        const {text, created_at} = this.props.post;
         const {username} = this.state;
 
         let date = new Date(created_at);
@@ -45,9 +47,11 @@ class PostText extends Component {
                 </div>
             </div>
             <div className="row">
-                <div className="col-xs-12 text-xs-right">
+                <div className="col-xs-12 text-xs-right post-copy">
                     <small>
-                        <i className="fa fa-user">&nbsp;</i> {username} <i className="fa fa-calendar">&nbsp;</i> {date.toLocaleDateString('cs-CZ')} <i className="fa fa-clock-o">&nbsp;</i> {date.toLocaleTimeString('cs-CZ')}
+                        <span className="icon-spacing"><i className="fa fa-user">&nbsp;</i> {username} </span>
+                        <span className="icon-spacing"><i className="fa fa-calendar">&nbsp;</i> {date.toLocaleDateString('cs-CZ')}</span>
+                        <span className="icon-spacing"><i className="fa fa-clock-o">&nbsp;</i> {date.toLocaleTimeString('cs-CZ')}</span>
                     </small>
                 </div>
             </div>

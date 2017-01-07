@@ -58,7 +58,7 @@ class TopicLink extends Component {
                 <div className="row">
                     <div className="col-xs-12 col-sm-6 col-md-3 text-xs-center text-sm-left text-md-left">
                         <Link to={`/board/${board_id}/topic/${id}`} className="card-link">
-                            {changeCase.upperCaseFirst(title)}
+                            <strong>{changeCase.upperCaseFirst(title)}</strong>
                         </Link>
                     </div>
                     <div className="col-xs-12 col-sm-6 col-md-3 text-xs-center text-sm-center">
@@ -73,7 +73,8 @@ class TopicLink extends Component {
                     </div>
                     <div className="col-xs-12 col-sm-6 col-md-3 text-xs-center text-sm-center text-md-right">
                         <small>
-                            <i className="fa fa-calendar">&nbsp;</i> {date.toLocaleDateString('cs-CZ')} <i className="fa fa-clock-o">&nbsp;</i> {date.toLocaleTimeString('cs-CZ')}
+                            <span className="icon-spacing"><i className="fa fa-calendar">&nbsp;</i> {date.toLocaleDateString('cs-CZ')}</span>
+                            <span className="icon-spacing"><i className="fa fa-clock-o">&nbsp;</i> {date.toLocaleTimeString('cs-CZ')}</span>
                         </small>
                     </div>
                 </div>

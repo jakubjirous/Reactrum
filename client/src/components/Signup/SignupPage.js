@@ -17,7 +17,7 @@ class SignupPage extends Component {
 
         return (
             <div className="row">
-                <div className="col-xs-12 col-md-6 col-md-offset-3 col-lg-4 col-lg-offset-4">
+                <div className="col-xs-12 col-md-6 offset-md-3 col-lg-4 offset-lg-4">
                     <SignupForm
                         userSignupRequest={userSignupRequest}
                         addFlashMessage={addFlashMessage}

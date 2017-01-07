@@ -3,6 +3,9 @@ import {Link} from 'react-router';
 import changeCase from 'change-case';
 
 
+import './PostHeader.scss';
+
+
 /**
  * PostHeader component
  */
@@ -48,8 +51,8 @@ class PostHeader extends Component {
         const {board, topic} = this.state;
 
         return (
-            <div>
-                <h3>
+            <div className="post-header">
+                <h4>
                     <Link to={`/boards`}>
                         Boards
                     </Link>
@@ -63,7 +66,7 @@ class PostHeader extends Component {
                         <i className="fa fa-chevron-right">&nbsp;</i>
                     </small>
                     {changeCase.upperCaseFirst(topic.title)}
-                </h3>
+                </h4>
             </div>
         )
     }

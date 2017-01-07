@@ -45,7 +45,7 @@ router.get('/:identifier', (req, res) => {
         select: ['id', 'title', 'posts_count', 'board_id', 'user_id', 'created_at'],
         where: {board_id: req.params.identifier}
     })
-        .orderBy('created_at', 'DESC')
+        .orderBy('created_at', 'ASC')
         .fetchAll().then(topics => {
         res.json({topics});
     });

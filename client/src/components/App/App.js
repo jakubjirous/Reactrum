@@ -4,6 +4,9 @@ import NavigationBar from '../Navigation/NavigationBar';
 import FlashMessageList from '../Flash/FlashMessageList';
 
 
+import './App.scss';
+
+
 /**
  * App component
  */

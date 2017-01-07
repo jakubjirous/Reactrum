@@ -3,7 +3,8 @@ import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {logout} from '../../actions/authActions';
 import NavigationLink from '../Navigation/NavigationLink';
-// import logo from 'logo.svg';
+
+import './NavigationBar.scss';
 
 
 /**
