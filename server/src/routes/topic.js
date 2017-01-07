@@ -1,11 +1,11 @@
 import express from 'express';
 import authenticate from '../middlewares/authenticate';
-import commonValidations from '../shared/validations/board';
+import commonValidations from '../shared/validations/topic';
 import isEmpty from 'lodash/isEmpty';
 
 
 // models
-import Board from '../models/board';
+import Topic from '../models/topic';
 
 
 // express router
@@ -21,12 +21,12 @@ let router = express.Router();
 function validateInput(data, otherValidations) {
     let {errors} = otherValidations(data);
 
-    return Board.query({
+    return Topic.query({
         where: {title: data.title}
-    }).fetch().then(board => {
-        if (board) {
-            if ((board.get('title') === data.title)) {
-                errors.title = 'There is board with such title';
+    }).fetch().then(topic => {
+        if (topic) {
+            if ((topic.get('title') === data.title)) {
+                errors.title = 'There is topic with such title';
             }
         }
         return {
@@ -38,33 +38,36 @@ function validateInput(data, otherValidations) {
 
 
 /**
- * Get all boards in category by ID
+ * Get all topic in board by ID
  */
 router.get('/:identifier', (req, res) => {
-    Board.query({
-        select: ['id', 'title'],
-        where: { category_id: req.params.identifier }
-    }).fetchAll().then(boards => {
-        res.json({ boards });
+    Topic.query({
+        select: ['id', 'title', 'posts_count', 'board_id', 'user_id', 'created_at'],
+        where: {board_id: req.params.identifier}
+    })
+        .orderBy('created_at', 'DESC')
+        .fetchAll().then(topics => {
+        res.json({topics});
     });
 });
 
 
 /**
- * Get board by ID
+ * Get topic by ID
  */
 router.get('/id/:identifier', (req, res) => {
-    Board.query({
+    Topic.query({
         select: ['id', 'title'],
-        where: { id: req.params.identifier }
-    }).fetch().then(board => {
-        res.json({ board });
+        where: {id: req.params.identifier}
+    })
+        .fetch().then(topic => {
+        res.json({topic});
     });
 });
 
 
 /**
- * Create new board in category
+ * Create new topic in board
  */
 router.post('/', authenticate, (req, res) => {
 
@@ -74,19 +77,19 @@ router.post('/', authenticate, (req, res) => {
     validateInput(req.body, commonValidations).then(({errors, isValid}) => {
 
         if (isValid) {
-            const {title, categoryIdentifier} = req.body;
-            const category_id = categoryIdentifier;
+            const {title, boardIdentifier, userIdentifier} = req.body;
+            const board_id = boardIdentifier;
+            const user_id = userIdentifier;
 
-            Board.forge({
-                title, category_id
+            Topic.forge({
+                title, board_id, user_id
             }, {hasTimestamps: true}).save()
-                .then(board => res.json({success: true}))
+                .then(topic => res.json({success: true}))
                 .catch(err => res.status(500).json({errors: err}));
         } else {
             // response to client if errors
             res.status(400).json(errors);
         }
-
 
     });
 });

@@ -1,9 +1,6 @@
 import React, {Component} from 'react';
 import {Link} from 'react-router';
 
-// import logo from 'logo.svg';
-// import './Greetings.css';
-
 
 /**
  * Greetings component
@@ -12,13 +9,13 @@ class Greetings extends Component {
     render() {
         return (
             <div>
-                <div className="Greetings-header">
-                    {/*<img src="" className="Greetings-logo" alt="logo"/>*/}
-                    <h2>Welcome in reactrum</h2>
-                    <h6>Easy forum created by React/Redux technology</h6>
-                </div>
+                <div className="greetings-header">
+                    <i className="fa fa-connectdevelop">&nbsp;</i>
+                    <h1>Welcome in reactrum</h1>
+                    <h5>Easy forum created by React/Redux technology</h5>
 
-                <Link to="/board" className="btn btn-primary btn-lg">Get started</Link>
+                    <Link to="/boards" className="btn btn-primary btn-lg">Get started</Link>
+                </div>
             </div>
         )
     }

@@ -33,9 +33,13 @@ class CategoryList extends Component {
 
 
     render() {
+
+        const {getAllBoardsInCategoryById} = this.props;
+
         const categoryList = this.state.categories.map(category =>
-            <Category key={category.id} category={category} />
+            <Category key={category.id} category={category} getAllBoardsInCategoryById={getAllBoardsInCategoryById} />
         );
+
         return (
             <div>
                 {categoryList}
@@ -45,7 +49,8 @@ class CategoryList extends Component {
 }
 
 CategoryList.PropTypes = {
-    getAllCategories: React.PropTypes.func.isRequired
+    getAllCategories: React.PropTypes.func.isRequired,
+    getAllBoardsInCategoryById: React.PropTypes.func.isRequired
 };
 
 export default CategoryList;

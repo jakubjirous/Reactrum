@@ -42,6 +42,9 @@ function validateInput(data, otherValidations) {
 }
 
 
+/**
+ * Get user by email or username
+ */
 router.get('/:identifier', (req, res) => {
     User.query({
         select: ['username', 'email'],
@@ -53,7 +56,22 @@ router.get('/:identifier', (req, res) => {
 });
 
 
+/**
+ * Get user by ID
+ */
+router.get('/id/:identifier', (req, res) => {
+    User.query({
+        select: ['username'],
+        where: { id: req.params.identifier },
+    }).fetch().then(user => {
+        res.json({ user });
+    });
+});
 
+
+/**
+ * Create user
+ */
 router.post('/', (req, res) => {
 
     // parse request body to terminal console

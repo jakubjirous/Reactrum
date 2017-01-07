@@ -72,7 +72,7 @@ class LoginForm extends Component {
         if (this.isValid()) {
             this.setState({errors: {}, isLoading: true });
             this.props.login(this.state).then(
-                () => this.context.router.push('/'),
+                () => this.context.router.push('/boards'),
                 ({response}) => this.setState({errors: response.data.errors, isLoading: false})
             );
         }

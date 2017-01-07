@@ -13,6 +13,9 @@ import User from '../models/user';
 let router = express.Router();
 
 
+/**
+ * Testing authentication of user
+ */
 router.post('/', (req, res) => {
 
     const { identifier, password } = req.body;

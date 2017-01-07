@@ -1,0 +1,47 @@
+h1 {
+    margin-bottom: 40px;
+}
+
+.greetings-header {
+    text-align: center;
+    margin: 60px 0;
+}
+
+.greetings-header i {
+    font-size: 60px;
+    animation: greetings-logo infinite 20s linear;
+}
+
+.greetings-header h1 {
+    margin: 20px 0 10px 0;
+}
+
+.greetings-header h5 {
+    margin: 10px 0 60px 0;
+}
+
+
+@keyframes greetings-logo {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.navbar {
+    margin-bottom: 40px;
+}
+
+.navbar-brand {
+    padding-left: 20px;
+}
+
+.navbar-brand i {
+    animation: greetings-logo infinite 20s linear;
+}
+
+.btn-create {
+    margin: 20px 0;
+}

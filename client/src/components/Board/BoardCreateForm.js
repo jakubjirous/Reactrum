@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import classnames from 'classnames';
 import TextFieldGroup from '../Common/TextFieldGroup';
-import {connect} from 'react-redux';
-import {createBoard} from '../../actions/boardActions';
 
 import isEmpty from 'lodash/isEmpty';
 import Validator from 'validator';
@@ -17,7 +15,7 @@ function validateInput(data) {
         errors.title = 'This field is required';
     }
 
-    // email field validation
+    // categoryIdentifier field validation
     if (Validator.isNull(data.categoryIdentifier)) {
         errors.categoryIdentifier = 'This field is required';
     }
@@ -98,7 +96,7 @@ class BoardCreateForm extends Component {
                     });
 
                     // redirects on successful server response
-                    this.context.router.push('/board');
+                    this.context.router.push('/boards');
                 },
                 ({response}) => this.setState({errors: response.data, isLoading: false})
             );
@@ -116,13 +114,13 @@ class BoardCreateForm extends Component {
 
         return (
             <form onSubmit={this.onSubmit}>
-                <h1>Create new board</h1>
+                <h3>Create new board</h3>
 
                 <TextFieldGroup
                     id="titleInput"
                     field="title"
                     value={title}
-                    label="Board title"
+                    label="Title"
                     error={errors.title}
                     placeholder="Enter new board title"
                     onChange={this.onChange}
@@ -136,7 +134,8 @@ class BoardCreateForm extends Component {
                         id="categorySelect"
                         onChange={this.onChange}
                         value={categoryIdentifier}>
-                        <option value="" disabled>Choose board category</option>
+                        <option value="" disabled>Choose new board category</option>
+                        <option value="" disabled>–––––––––––––––––––––––––</option>
                         {options}
                     </select>
                     {errors.categoryIdentifier && <div className="form-control-feedback"><small>{errors.categoryIdentifier}</small></div>}
@@ -163,4 +162,4 @@ BoardCreateForm.contextTypes = {
 };
 
 
-export default connect(null, {createBoard})(BoardCreateForm);
+export default BoardCreateForm;
